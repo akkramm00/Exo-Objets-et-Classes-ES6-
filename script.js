@@ -41,5 +41,46 @@ let joueur3 = new Joueur('Joueur' , '3' , 100 , 0)
 
 let parrtie = new Partie(3 , [joueur1, joueur2, joueur3])
 
+//=====================================  INSTRUCTION  ======================================
+
+// Mettons les en place les éléments suivants 
+// Modifions la la classe Joueur afin d'implémenter les méthodes suivantes/
+// ==> Une méthode permettant de retrouver l'identité du joueur(son nom et son prénom).
+// ==> Une méthpode permettant d'afficher lels points du joueur, qui appelera la méthode
+// précédente et affichera le nombre de pints du joueur.
+// ==> Une méthode permettant à un joueur d'attaquer : Une attaque peut faire perdre aléatoirement
+// entre 1 et 50 points à un adversaire. Si l'adversaire n'a plus de points , son total ne peut etre 
+// négatif, il vaudra simplement zéro. Un joueur dispose de 3 tours, chaque attaque augmente le nombre de tours consommés.
+
+//+++++++++++++++++++++++++++++++++++++++ Script +++++++++++++++++++++++++++++++++++++++++
+
+class Joueur {
+    constructor(nom, prenom, points, tour) {
+        this.nom = nom
+        this.prenom = prenom
+        this.points = 100
+        this.tour = 0
+    }
+    rand(nb) {
+        return Math.floor(Math.random() * Math.floor(nb));
+    }
 
 
+    attaque(adversaire) {
+        if (this.tour < 3) {
+            adversaire . points -= this.rand(51)
+            if(adversaire.points < 0) {
+                adversaire.points =0
+            }
+            adversaire.affichPoints()
+            ++this.tour
+        }
+    }
+    identite() {
+        return `${this.nom} ${this.prenom}`
+    }
+
+    affichePoints() {
+        console.log(`${this.identite()} possède ${this.points} points`)
+    }
+}
