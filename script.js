@@ -84,3 +84,40 @@ class Joueur {
         console.log(`${this.identite()} possède ${this.points} points`)
     }
 }
+
+// ===================================== Answer two ==================================
+// +++++++++++++++++++++++++++++++++++ Instruction +++++++++++++++++++++++++++++++++++
+
+// Considérons désormais ces éléments supplémentaires :
+// Définissons,  pour chaque joueur, une méthode lui permettant d'effectuer une " Super attaque".
+// Une super attaque est une attaque faisant perdre 10 points de plus .
+
+// Modifions la méthode 'attaque()' afin qu'elle accepte in second paramètre "bonus". Le bonus sera cumulé à la valeur initiale de l'attaque.
+
+Joueur.prototype.superAttaque = function(adversaire) {
+    this.attaque(adversaire, 10)
+}
+
+class Joueur {
+    //...
+    attaque(adversaire,bonus = 0) {
+        if (this.tour < 3) {
+            adversaire.points -= this.rand(51) + bonus
+            if (adversaire.points < 0) {
+                adversaire.points = 0
+            }
+            adversaire.affichePoints()
+            ++this.tour
+        }
+    }
+    //...
+}
+
+
+
+
+
+
+
+
+
