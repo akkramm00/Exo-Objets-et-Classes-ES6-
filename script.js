@@ -113,8 +113,52 @@ class Joueur {
     //...
 }
 
+// =======================================La methode pour Vainqueur====================================
+// Questio : il est tepms d'implémenter la méthode permettant d'indiquer le vainqueur pour une partie et de tester le bon déroulement de notre jeu.
+
+// Ecrivons le déroulement de la partie , on considère qu'un joueur peut effectuer une attaque et de déterminer lequeldispose du plus de points.
+// Affichons alors l'identité du vainqueur!
+
+//+++++++++++++++++++++++++++++++++++++++ Voici le déroulement ++++++++++++++++++++++++++++++++++++++++
+//on considère qu'un joueur peut effectuer une attaque et une super attaque lors de chque tour .
+
+for (let tour = 0 ; tour < Partie.tour ; tour++) {
+    joueur1.attaque(joueur3)
+    joueur1.superAttaque(joueur2)
+
+    joueur2.attaque(joueur1)
+    joueur2.superAttaque(joueur3)
+
+    joueur3.attaque(joueur2)
+    joueur3.superAttaque(joueur1)
+}
 
 
+joueur1.affichPoints()
+joueur2.affichPoints()
+joueur3.affichPoints()
+
+Partie.vainqueur()
+
+// ++++++++++++++++++++++++++++++++++++++++++++ SOLUTION +++++++++++++++++++++++++++++++++++++++++++++++
+
+class Partie {
+    //...
+    vainqueur() {
+        let pts = 0
+        this.joueurs.forEach(joueur => {
+            this.joueurVainqueur = joueur.points > pts ? joueur :this.joueurVainqueur
+            pts = joueur.points > pts ? joueur.points : pts
+        })
+
+        if (this.joueurVaniqueur === null) {
+            console.log(`Oups personne n\'a gagné !`)
+            return;
+        }
+
+        console.log(`${this.joueurVainqueur.identite()} gagne la partie avec ${this.joueurVainqueur.points} points`)
+    }
+}
 
 
 
